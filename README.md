@@ -1,6 +1,7 @@
 # Developer Assessment - Integrations
 This assessment gauges development skills regarding data transformation and coding practices relating to integrations. 
 
+ALL CODE MUST BE WRITTEN BY YOU (with the exception of 3rd party libraries for parsing / transforming data).
 
 # Given information : 
 1. You are given two input files : 
