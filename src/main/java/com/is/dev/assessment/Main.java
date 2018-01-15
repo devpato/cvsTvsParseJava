@@ -9,6 +9,8 @@ public class Main {
 
         // Read the README to learn how to begin
 
+        System.out.println("This is a test");
+
     }
 
 }
