@@ -57,8 +57,8 @@ On a Linux/UNIX system - this can also be done by running the `run.sh` file
 - (15%) products.json and products.xml are in the proper format
 - (20%) Method used to parse the CSV
 - (20%) Method used to transform the data into JSON / XML
-- (10%) Error handling
-- (20%) General coding style
+- (15%) Error handling
+- (15%) General coding style
 
 ## Hints
 - A CSV record may contain a comma in it that's not a delimiter 
