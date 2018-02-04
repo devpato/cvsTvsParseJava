@@ -17,6 +17,13 @@ public class Main {
         // After running the second command it should ouput : "Test successful" from below
         System.out.println("Test successful");
         //this can be deleted once confirmed
+        
+        ProductCsvUtil readcvs = new ProductCsvUtil();
+        String csvFile = "/Users/TAMO/Desktop/dev-assessment/products.csv";
+        String tsvFile = "/Users/TAMO/Desktop/dev-assessment/products.tsv";
+        readcvs.cvsTvsReader(csvFile);        
+        System.out.println("*****************************************************************");
+        readcvs.cvsTvsReader(tsvFile);
     }
 
 }
