@@ -1,7 +1,6 @@
 package com.is.dev.assessment;
 
 import com.is.dev.assessment.util.*;
-import com.is.dev.assessment.domain.*;
 
 public class Main {
 
@@ -18,12 +17,13 @@ public class Main {
         System.out.println("Test successful");
         //this can be deleted once confirmed
         
-        ProductCsvUtil readcvs = new ProductCsvUtil();
-        String csvFile = "/Users/TAMO/Desktop/dev-assessment/products.csv";
-        String tsvFile = "/Users/TAMO/Desktop/dev-assessment/products.tsv";
-        readcvs.cvsTvsReader(csvFile);        
-        System.out.println("*****************************************************************");
-        readcvs.cvsTvsReader(tsvFile);
+        ProductCsvUtil readUtil = new ProductCsvUtil();
+        String csvFile = "products.csv";
+        String tsvFile = "products.tsv";
+        readUtil.cvsTvsReader(csvFile);
+        readUtil.cvsTvsReader(tsvFile);     
+        readUtil.isItUnique();
+        
     }
 
 }

@@ -7,12 +7,16 @@ import java.io.IOException;
 import java.util.*;
 
 import com.is.dev.assessment.domain.Product;
-import com.opencsv.bean.CsvToBeanBuilder;
+//import com.opencsv.bean.CsvToBeanBuilder;
 
 
 public class ProductCsvUtil {
 	
-
+	//Contains all (is always good to store the original list)
+	List<Product> products = new ArrayList<Product>();
+	//Unique products by the SKU
+	List<Product> uniqueValues = new ArrayList<Product>();
+	
 	//Reading the CVS file and parsing it into Product objects
 	public void cvsTvsReader (String csvFile)  {
 		
@@ -23,12 +27,12 @@ public class ProductCsvUtil {
 			String currentLine = "";
 			Product product;
 			String[] tempProduct;
-			ArrayList<Product> products = new ArrayList<Product>();
 			String splitter;
 			
-			//Checki
+			//Checking if it's a .cvs or tsv. This way the method knows how to read the lines.
 			if(csvFile.contains(".csv")) {
-				splitter = ",";
+				//This regex will handle the commas inside "". e.g "Anemone Pouch, Khaki"
+				splitter = ",(?=([^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)";
 			} else {
 				splitter = "\t";
 			}
@@ -44,6 +48,9 @@ public class ProductCsvUtil {
 				currentLine = br.readLine();
 				
 				while( currentLine != null) {
+					/*Storing it in a temp variable just to make it more readable but I could have pass it to the
+					 * product object like this e.g currentLine.split(splitter)[0],currentLine.split(splitter)[1]...
+					*/
 					tempProduct = currentLine.split(splitter);
 					product = new Product(
 							tempProduct[0],
@@ -54,15 +61,19 @@ public class ProductCsvUtil {
 							tempProduct[5]
 									);
 					
-					products.add(product);
-					System.out.println(
+					//Passing values from .CSV since this data is more accurate info
+					if(csvFile.contains(".csv")) {
+						products.add(product); 
+					}					
+					
+					/*System.out.println(
 							" Title: " + product.getTitle() + 
 							" UPC: " + product.getUpc() +
 							" SKU: " + product.getSku() + 
 							" Price: " + product.getPrice() +
 							" Condition: " + product.getCondition() + 
 							" Quantity: " + product.getQuantity()
-							);
+							); */
 					
 					//Read next line;
 					currentLine = br.readLine();
@@ -87,4 +98,41 @@ public class ProductCsvUtil {
 		}	
 		
 	}	
+	
+	//Removes Products with duplicate SKUs
+	public void isItUnique () {
+		
+		LinkedHashSet<String> skus = new LinkedHashSet<String>();  
+		List<Product> allTheDuplicates = new ArrayList<Product>();
+		
+		for(Product product:products ) {
+			if(skus.contains(product.getSku())){
+				allTheDuplicates.add(product);
+			}
+			skus.add(product.getSku());
+		}
+		
+		uniqueValues.addAll(products);
+		uniqueValues.removeAll(allTheDuplicates);
+
+	}	
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(ArrayList<Product> products) {
+		this.products = products;
+	}
+
+
+	public List<Product> getUniquevalues() {
+		return uniqueValues;
+	}
+
+
+	public void setUniquevalues(ArrayList<Product> uniquevalues) {
+		this.uniqueValues = uniquevalues;
+	}
+	
 }
